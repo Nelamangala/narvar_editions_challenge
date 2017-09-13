@@ -1,0 +1,461 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema", 
+    "required": [
+        "last_modified", 
+        "type", 
+        "revision", 
+        "key", 
+        "title"
+    ], 
+    "type": "object", 
+    "properties": {
+        "number_of_pages": {
+            "type": "number"
+        }, 
+        "subtitle": {
+            "type": "string"
+        }, 
+        "weight": {
+            "type": "string"
+        }, 
+        "series": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "covers": {
+            "items": {
+                "type": "number"
+            }, 
+            "type": "array"
+        }, 
+        "ia_loaded_id": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "lc_classifications": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "latest_revision": {
+            "type": "number"
+        }, 
+        "ocaid": {
+            "type": "string"
+        }, 
+        "contributions": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "description": {
+            "anyOf": [
+                {
+                    "required": [
+                        "type", 
+                        "value"
+                    ], 
+                    "type": "object", 
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }, 
+                        "value": {
+                            "type": "string"
+                        }
+                    }
+                }, 
+                {
+                    "type": "string"
+                }
+            ]
+        }, 
+        "subject_time": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "edition_name": {
+            "type": "string"
+        }, 
+        "genres": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "contributors": {
+            "items": {
+                "required": [
+                    "role", 
+                    "name"
+                ], 
+                "type": "object", 
+                "properties": {
+                    "role": {
+                        "type": "string"
+                    }, 
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            }, 
+            "type": "array"
+        }, 
+        "source_records": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "title": {
+            "type": "string"
+        }, 
+        "work_titles": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "languages": {
+            "items": {
+                "required": [
+                    "key"
+                ], 
+                "type": "object", 
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    }
+                }
+            }, 
+            "type": "array"
+        }, 
+        "subjects": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "publish_country": {
+            "type": "string"
+        }, 
+        "subject_place": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "by_statement": {
+            "type": "string"
+        }, 
+        "oclc_numbers": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "type": {
+            "required": [
+                "key"
+            ], 
+            "type": "object", 
+            "properties": {
+                "key": {
+                    "type": "string"
+                }
+            }
+        }, 
+        "uris": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "physical_dimensions": {
+            "type": "string"
+        }, 
+        "revision": {
+            "type": "number"
+        }, 
+        "other_titles": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "publishers": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "isbn_invalid": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "title_prefix": {
+            "type": "string"
+        }, 
+        "ia_box_id": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "table_of_contents": {
+            "items": {
+                "required": [
+                    "type"
+                ], 
+                "type": "object", 
+                "properties": {
+                    "pagenum": {
+                        "type": "string"
+                    }, 
+                    "title": {
+                        "type": "string"
+                    }, 
+                    "level": {
+                        "type": "number"
+                    }, 
+                    "value": {
+                        "type": "string"
+                    }, 
+                    "label": {
+                        "type": "string"
+                    }, 
+                    "type": {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "key"
+                                ], 
+                                "type": "object", 
+                                "properties": {
+                                    "key": {
+                                        "type": "string"
+                                    }
+                                }
+                            }, 
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }, 
+                    "class": {
+                        "type": "string"
+                    }
+                }
+            }, 
+            "type": "array"
+        }, 
+        "dewey_decimal_class": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "physical_format": {
+            "type": "string"
+        }, 
+        "last_modified": {
+            "required": [
+                "type", 
+                "value"
+            ], 
+            "type": "object", 
+            "properties": {
+                "type": {
+                    "type": "string"
+                }, 
+                "value": {
+                    "type": "string"
+                }
+            }
+        }, 
+        "key": {
+            "type": "string"
+        }, 
+        "authors": {
+            "items": {
+                "required": [
+                    "key"
+                ], 
+                "type": "object", 
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    }
+                }
+            }, 
+            "type": "array"
+        }, 
+        "publish_places": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "pagination": {
+            "type": "string"
+        }, 
+        "uri_descriptions": {
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "string"
+                    }, 
+                    {
+                        "type": "null"
+                    }
+                ]
+            }, 
+            "type": "array"
+        }, 
+        "classifications": {
+            "type": "object", 
+            "properties": {}
+        }, 
+        "created": {
+            "required": [
+                "type", 
+                "value"
+            ], 
+            "type": "object", 
+            "properties": {
+                "type": {
+                    "type": "string"
+                }, 
+                "value": {
+                    "type": "string"
+                }
+            }
+        }, 
+        "lccn": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "notes": {
+            "anyOf": [
+                {
+                    "required": [
+                        "type", 
+                        "value"
+                    ], 
+                    "type": "object", 
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }, 
+                        "value": {
+                            "type": "string"
+                        }
+                    }
+                }, 
+                {
+                    "type": "string"
+                }
+            ]
+        }, 
+        "identifiers": {
+            "type": "object", 
+            "properties": {
+                "dnb": {
+                    "items": {
+                        "type": "string"
+                    }, 
+                    "type": "array"
+                }, 
+                "amazon": {
+                    "items": {
+                        "type": "string"
+                    }, 
+                    "type": "array"
+                }, 
+                "goodreads": {
+                    "items": {
+                        "type": "string"
+                    }, 
+                    "type": "array"
+                }, 
+                "librarything": {
+                    "items": {
+                        "type": "string"
+                    }, 
+                    "type": "array"
+                }
+            }
+        }, 
+        "isbn_13": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "url": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "isbn_10": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "publish_date": {
+            "type": "string"
+        }, 
+        "coverimage": {
+            "type": "string"
+        }, 
+        "work_title": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "works": {
+            "items": {
+                "required": [
+                    "key"
+                ], 
+                "type": "object", 
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    }
+                }
+            }, 
+            "type": "array"
+        }, 
+        "first_sentence": {
+            "required": [
+                "type", 
+                "value"
+            ], 
+            "type": "object", 
+            "properties": {
+                "type": {
+                    "type": "string"
+                }, 
+                "value": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
