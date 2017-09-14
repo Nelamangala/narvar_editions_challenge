@@ -44,6 +44,7 @@ public class TitleWordsParserServiceTest {
 		Map<String, Long> parseResult = parserService.parse(title);
 		Assert.assertNotNull(parseResult);
 		Assert.assertThat(parseResult.get("TEACHERS'"), is(1L));
+		Assert.assertNull(parseResult.get("2)"));
 	}
 	
 	@Test

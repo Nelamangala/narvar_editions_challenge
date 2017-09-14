@@ -6,10 +6,15 @@ import org.springframework.stereotype.Service;
 import com.narvar.challenge.data.store.DataStore;
 import com.narvar.challenge.data.store.WordCountStore;
 
+/**
+ * This is a thread safe class as it does not store any state information.
+ * @author nelamangala
+ *
+ */
 @Service
 public class WordCountDataService implements DataService<String, Long>{
 
-	DataStore<String, Long> dataStore;
+	private DataStore<String, Long> dataStore;
 	
 	public WordCountDataService(@Autowired WordCountStore wordCountStore) {
 		dataStore = wordCountStore;
@@ -21,15 +26,18 @@ public class WordCountDataService implements DataService<String, Long>{
 	}
 
 	@Override
-	public Long update(String key, Long value) {
+	public void update(String key, Long value) {
 		Long wordCount = dataStore.getByKey(key);
 		if(wordCount == null) {
-			wordCount = value;
+			dataStore.upsertKeyValue(key, value);
 		}else {
-			wordCount += value;
+			dataStore.upsertKeyValue(key, value + dataStore.getByKey(key));
 		}
-		dataStore.upsertKeyValue(key, wordCount);
-		return wordCount;
+	}
+
+	@Override
+	public void reset() {
+		dataStore.reset();
 	}
 
 }

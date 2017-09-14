@@ -16,7 +16,11 @@ public interface DataService<K, V> {
 	 * @param key
 	 * @param value
 	 * @return
-	 * 		Updated value for this key.
 	 */
-	public V update(K key, V value);
+	public void update(K key, V value);
+	
+	/**
+	 * Clears the data contained in the store. This is irreversible.
+	 */
+	public void reset();
 }

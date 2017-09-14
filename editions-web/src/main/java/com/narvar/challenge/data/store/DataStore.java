@@ -17,4 +17,15 @@ public interface DataStore<K, V> {
 	 * @param value
 	 */
 	public void upsertKeyValue(K key, V value);
+	
+	/**
+	 * Clears all data held and it is irreversible.
+	 */
+	public void reset();
+	
+	/**
+	 * Returns the current size of data store, i.e the number of elements inside data store.
+	 * @return
+	 */
+	public Integer getDataStoreSize();
 }
