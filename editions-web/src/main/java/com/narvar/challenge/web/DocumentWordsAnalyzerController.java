@@ -50,7 +50,7 @@ public class DocumentWordsAnalyzerController {
     }
     
     @PostMapping("/edition/title/word/reset")
-    public ResponseEntity<String> getTitleWordsReset(@RequestParam("size") Integer size) {
+    public ResponseEntity<String> titleWordsReset(@RequestParam("size") Integer size) {
        wordAnalyzer.resetAndInitAnalyzer(size);
        return new ResponseEntity<String>("Success", HttpStatus.OK);
     }

@@ -6,17 +6,29 @@ import feign.RequestLine;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 
-import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.narvar.challenge.api.request.Edition;
+import com.narvar.challenge.api.response.WordFrequency;
+import com.narvar.challenge.api.response.WordLeaderBoard;
 
 public interface EditionClient {
 
     @RequestLine("GET /edition/title/word/leader-board")
-    List<String> listLeaderBoard();
+    WordLeaderBoard listLeaderBoard();
+    
+    @RequestLine("GET /edition/title/word/frequency")
+    WordFrequency getWordFrequency(@RequestParam(value="word") String ke);
 
     @RequestLine("POST /edition")
     @Headers("Content-Type: application/json")
-    void addEdition(Object payload);
-
+    ResponseEntity<String> addEdition(Edition payload);
+    
+    @RequestLine("POST /edition")
+    @Headers("Content-Type: application/json")
+    ResponseEntity<String> titleWordsReset(@RequestParam("size") Integer size);
+    
     static EditionClient connect(String baseUrl) {
         return Feign.builder()
                     .encoder(new JacksonEncoder())

@@ -38,24 +38,24 @@ public class HighestFrequencyWordAnalyzer implements WordAnalyzer{
 		this.parserService = parserService;
 		this.dataService = dataService;
 	}
-	// For thread safety
+	// Synchronized for thread safety, used to keep track of documents processed by their key
 	private Set<String> documentsProcessed = Collections.synchronizedSet(new HashSet<String>());
 	
 	public static final int DEFAULT_LEADERS_TRACKED = 10;
 	
 	private Integer totalLeadersToBeTracked = DEFAULT_LEADERS_TRACKED;
 	
-	// For thread safety
+	// Using PriorityBlockingQueue for thread safety. Using this to achieve a min Heap
 	private PriorityBlockingQueue<WordCount> priorityQueue = new PriorityBlockingQueue<>(DEFAULT_LEADERS_TRACKED);
 	
 	@Override
 	public WordFrequency getWordFrequency(String word) {
 		WordFrequency wordFrequency = new WordFrequency();
 		wordFrequency.setWord(word);
-		Long wordCount = dataService.get(word);
+		Long wordCount = dataService.get(word.toUpperCase());
 		int totalDocumentsProcessed = documentsProcessed.size();
 		wordFrequency.setTotalDocumentsProcessed(totalDocumentsProcessed);
-		wordFrequency.setTotalCountOfWord(wordCount);
+		wordFrequency.setTotalCountOfWord(wordCount == null ? 0l : wordCount);
 		
 		if(wordCount != null && totalDocumentsProcessed > 0) {
 			wordFrequency.setFrequency((double) wordCount / totalDocumentsProcessed);
@@ -71,7 +71,7 @@ public class HighestFrequencyWordAnalyzer implements WordAnalyzer{
 		WordCount[] array = new WordCount[priorityQueue.size()];
 		Iterator<WordCount> pqIterator = priorityQueue.iterator();
 		int count = 0;
-		while(pqIterator.hasNext()) {
+		while(pqIterator.hasNext()) { // Order of iteration is not guaranteed
 			array[count++] = pqIterator.next();
 		}
 		Arrays.sort(array);
@@ -83,7 +83,7 @@ public class HighestFrequencyWordAnalyzer implements WordAnalyzer{
 	public void resetAndInitAnalyzer(int size) {
 		dataService.reset();
 		priorityQueue.clear();
-		totalLeadersToBeTracked = new Integer(size);
+		totalLeadersToBeTracked = size <= 0 ? DEFAULT_LEADERS_TRACKED : new Integer(size);
 		documentsProcessed.clear();
 	}
 
@@ -95,6 +95,7 @@ public class HighestFrequencyWordAnalyzer implements WordAnalyzer{
 		}
 		documentsProcessed.add(documentKey);
 		
+		// Parse out all valid words in their order of occurrance
 		Map<String, Long> wordCounts = parserService.parse(title);
 		for(Entry<String, Long> wordAndCount : wordCounts.entrySet()) {
 			WordCount priorityQueueBottom = priorityQueue.peek();
@@ -107,9 +108,9 @@ public class HighestFrequencyWordAnalyzer implements WordAnalyzer{
 			if(priorityQueue.contains(currentParsedWord)) {
 				priorityQueue.remove(currentParsedWord);
 				priorityQueue.add(currentParsedWord);
-			} else if(priorityQueue.size() < totalLeadersToBeTracked) {
+			} else if(priorityQueue.size() < totalLeadersToBeTracked) { // Not yet reached the count of highest words to track ?
 				priorityQueue.add(currentParsedWord);
-			} else if(newCount >= priorityQueueBottom.getCount()){
+			} else if(newCount >= priorityQueueBottom.getCount()){ // Current word count is >= compared with the 10th highest word count
 				priorityQueue.remove();
 				priorityQueue.add(currentParsedWord);
 			}
